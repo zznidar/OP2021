@@ -33,6 +33,8 @@ def GCDm(st):
     # st Array
     prafaktorji = {} # dictionary arrajev
     for s in st:
+        if(s == 0):
+            raise Exception("Do you seriously want to calculate GCD of 0? :face_with_rolling_eyes:")
         prafaktorji[s] = [1]
         # dobimo prafaktroje
         i = 2
@@ -63,5 +65,4 @@ def GCDm(st):
 #GCDm([7919, 7907])
 
 ARR = list(map(int, input("Vnesi stevila, locena s presledkom, za izracun GCD: ").split()))
-print(ARR)
 GCDm(ARR)
