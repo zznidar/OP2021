@@ -8,3 +8,7 @@ js  | py
 `sum = (x, y) => x + y;` | `sum = lambda x, y: x + y`
 `var1 && var2` | `var1 and var2`
 `else if` | `elif`
+`[].push(el)` | `[].append(el)`
+`dict?.key \|\| default` | `dict.get(key, default)`
+`5/(0 \| 1)` | `5/(0 or 1)`
+`10>5 ? true : false` | `True if 10>5 else False`
