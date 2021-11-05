@@ -51,8 +51,17 @@ if(pozitivni):
 ## Rezine
 
 # Rezine: prvi trije, zadnji trije? Vsi razen prvih treh in zadnjih treh...
+pozitivni[0:3:1] #default step je 1
+pozitivni[0:3] #default start je 0
+pozitivni[:3]
+
+pozitivni[-3:] # zadnji trije
+
+pozitivni[:-4:-1] # default start je konec; negativen step
 
 # prva in druga polovica meseca
+pozitivni[:len(pozitivni)//2]
+pozitivni[len(pozitivni)//2:]
 
 # vsak drugi dan
 
