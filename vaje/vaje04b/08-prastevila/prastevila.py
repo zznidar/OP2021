@@ -7,57 +7,54 @@ def prinz(*rest):
     if(DEBUG):
         print(*rest)
 
-def eratosten(limit):
+def eratosten3(limit):
     if(limit < 3):
         return(0)
-    
-    ## Ok, naslednje 4 vrstice so zelo grde, ne tega delat.
-    if(limit == 1000000):
-        return(78498)
-    if(limit == 894209):
-        return(70861)
-    ## 
 
-    #vsa = [_ for _ in range(2, limit+1)]
-    #glavni = set(vsa)
-    glavni = set(range(2, limit+1))
-    crtana = set()
-    prastevila = set([2])
+    # True: stevilo smo ze obdelali
+    # False: do tega stevila se nismo prisli; lahko je prastevilo
+    glavni = [True, False] * ((limit-1)//2) # nase stevilo ne rabi biti na seznamu, ker nas zanima st. prastevil do izkljucno podanega st.
+    # s stevilkami: 2, 3, 4, 5 (where limit = 5): [True, False, True, False] => stevilo je index + 2
+    # Still, nas seznam je lahko daljsi, ker na koncu gledamo samo do (limit-1)-2 (limita ne gledamo) (index je za 2 manjsi)
 
-    prinz(0, glavni, crtana, prastevila)
+    ## Pripravimo seznam za prastevila
+    prastevila = [2]
+    ## Ce bo timeoutalo, naredimo samo stevcek, koliko je prastevil
 
-    while(max(prastevila)**2 < max(glavni)):
-        prinz("pogoj", max(prastevila)**2, max(glavni))
-        x = min(glavni)
-        #x = glavni.pop() ## tole bi delalo (je veliko hitreje), ce se set ne bi vmes randomly kar zmesal
-        prinz("x", x)
-        prastevila.add(x)
-        prinz("pra: ", prastevila)
-        for let_i in range(x, limit+1, x):
-            crtana.add(let_i)
-        prinz("crtana", crtana)
-        glavni = (glavni - crtana)
-        prinz("glavni sezna: ", glavni)
-    prastevila = (prastevila | glavni)
+    ## Poglejmo, do kod moramo loopati
+    finish = ((limit-1)**0.5)-2+1 # ker nas zanima velikost indexa
+    prinz("Popolnost diamanta: ", finish)
+
+    i = 1 # ker vemo, da je 2 prastevilo, zacnemo pri 3 (index 1)
+    while(i < finish):
+        if not glavni[i]:
+            # Prvic smo prisli do tega stevila
+            # To je prastevilo.
+            prastevila.append(i+2)
+            # V JuliaLang bi tu element-wise mnozili matrike:
+                # glavni bi bila ravno kontra: [False, True ...]
+                # mnozil bi jo s [False, True, True ...]
+                # Tako bi veckratniki stevila 3 postali False ("ze obiskani"), preostala stevila pa nespremenjena
+                # glavni .* [false, true, true ...]
+                # Julia bi sla brrrr
+            # Ampak delamo v Pythonu. Too bad.
+            # Probably bi bilo to mozno, ce importam numpy
+            # np.array([1,2,3]) * np.array([4,5,6]) = [4,10,18]
+
+            # Back on track
+            for let_i in range(i, len(glavni), (i+2)):
+                glavni[let_i] = True
+        i += 1
+    # Vsa glavna stevila oznacimo kot prastevila.
+    prinz("Konec zanke", i, glavni, prastevila)
+    # Ampak, ker smo smart, samo od trenutnega indeksa naprej *roll salfe meme*
+    for let_i in range(i, limit-1-2+1):
+        prinz(let_i)
+        if not glavni[let_i]:
+            prastevila.append(let_i+2)
+    prinz(prastevila)
     return(len(prastevila))
 
 
-def eratosten2(limit):
-    # TODO: robni primeri itd.
-    # ampak tudi to timeouta
-
-    vsa = [_ for _ in range(2, limit+1)] #glavni
-    pra = []
-
-    while True:
-        pra.append(vsa[0])
-        for let_i in range(pra[-1], limit, pra[-1]):
-            if let_i in vsa:
-                vsa.remove(let_i)
-        if(vsa[-1] < pra[-1]**2):
-            return(len(vsa) + len(pra) - 1)
-
-
-
 stevilo = int(input("Vpiši število: "))
-print(eratosten(stevilo))
+print(eratosten3(stevilo))
