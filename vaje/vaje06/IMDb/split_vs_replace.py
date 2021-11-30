@@ -1,0 +1,28 @@
+# Preverimo, ali je hitrejsi .split(" ") ali .replace(" ", "") -> len
+from time import perf_counter
+
+def split(str):
+    return(len(str.split(" ")))
+
+def replace(str):
+    a = len(str)
+    b = len(str.replace(" ", ""))
+    return(a-b + 1)
+
+s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel nulla non massa ultrices aliquet in sit amet urna. Aliquam iaculis in neque eu vestibulum. Phasellus dictum aliquam lacus vitae vehicula. Curabitur sit amet fermentum diam. Suspendisse placerat, erat non dignissim egestas, tellus mauris porta lorem, quis gravida turpis purus ut nulla. Nulla pulvinar lobortis arcu ut semper. Pellentesque vel placerat nulla. Donec malesuada varius suscipit. Praesent et diam suscipit, aliquet lacus rutrum, efficitur lacus. Sed a justo erat. Donec nec auctor urna."
+
+t1 = perf_counter()
+
+NoSimulations = 2
+loops = 100_000
+for i in range(NoSimulations):
+    for i in range(loops):
+        a = replace(s)
+    print(a)
+t2 = perf_counter()
+print(t2-t1)
+
+
+## Izkaze se, da je replace hitrejsi:
+## replace: 5,47 s
+## split: 13,30 s

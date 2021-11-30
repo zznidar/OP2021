@@ -30,6 +30,7 @@ def povprecna_ocena(serije):
     return(round(avg, 2))
 
 def dolga_imena(serije):
+    # Za optimizacijo gl. split_vs_replace.py (replace() je bistveno hitrejsi od split())
     out = []
     for title, _, _ in serije:
         if(len(title.split(" ")) > 2):
