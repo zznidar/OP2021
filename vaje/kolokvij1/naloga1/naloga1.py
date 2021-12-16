@@ -39,6 +39,6 @@ if(dni == 0):
 else:
     print(f"Čas trajanja izrednih razmer (v dnevih): {dni}")
     print(f"V tem času je zapadlo {round(sums, 2)} cm snega.")
-    print(f"Povprečna dnevna temperatura je bila {round(sumt/(dni or 0), 2)} °C.")
+    print(f"Povprečna dnevna temperatura je bila {round(sumt/(dni or 1), 2)} °C.")
 
 
