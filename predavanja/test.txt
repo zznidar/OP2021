@@ -1,0 +1,3 @@
+Tole je testni file.
+Nova vrstica.
+12345
