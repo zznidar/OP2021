@@ -1,0 +1,1 @@
+NameError: name 'nakup' is not defined
