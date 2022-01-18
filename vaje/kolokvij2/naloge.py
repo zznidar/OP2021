@@ -35,8 +35,7 @@ def manjkajoci(data, predmeti=None):
     for vpisna, priimek, ime, predmet, ocena in data:
         if(not predmeti):
             vsi_predmeti.add(predmet)
-        if(ocena > 5):
-            koncani.setdefault(vpisna, set()).add(predmet)
+        koncani.setdefault(vpisna, set()).update([predmet] if ocena > 5 else [])
     for k, v in koncani.items():
         out[k] = vsi_predmeti - v
     return(out)
